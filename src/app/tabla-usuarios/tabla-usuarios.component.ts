@@ -55,7 +55,8 @@ export class TablaUsuariosComponent {
           text: 'No se encontraron resultados, intente con otro usuario',
           icon: 'error',
           confirmButtonText: 'Aceptar'
-        })
+        });
+        (document.getElementById("inputBusqueda") as HTMLInputElement).value = "";
       } else {
         this.usuarios = data.items;
       }
