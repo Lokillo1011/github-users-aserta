@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {PrimeNGConfig, SelectItemGroup} from 'primeng/api';
+import Swal from 'sweetalert2';
 import {GithubapiService} from '../services/githubapi.service';
 
 @Component({
@@ -48,7 +49,16 @@ export class TablaUsuariosComponent {
   busquedaUsuario() {
     let valorInput = (document.getElementById("inputBusqueda") as HTMLInputElement).value;
     this._githubapiService.buscarUsuario(valorInput).subscribe((data: any) => {
-      this.usuarios = data.items;
+      if (data.total_count == 0) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'No se encontraron resultados, intente con otro usuario',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        })
+      } else {
+        this.usuarios = data.items;
+      }
     });
   }
 
