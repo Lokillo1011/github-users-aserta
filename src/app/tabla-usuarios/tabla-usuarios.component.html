@@ -1,0 +1,71 @@
+<div class="w-10 mx-auto my-6">
+  <div class="grid">
+    <div class="col-12 sm:col-12 md:col-12 lg:col-4 xl:col-4 justify-content-center p-card">
+      <div class="p-card-title " style="text-align: center">
+        <p class="uppercase mb-4 text-lg">Lista de Usuarios</p>
+      </div>
+      <div class="grid" style="text-align: center; justify-content: center">
+        <div class="sm:col-12 md:col-12">
+            <span class="p-input-icon-left">
+             <i class="pi pi-search"></i>
+          <input (input)="onInput()" type="text" pInputText id="inputBusqueda" class="p-inputtext-sm"
+                 placeholder="Buscar Usuario"/>
+          </span>
+          <button (click)="busquedaUsuario()" pButton pRipple type="button" label="Buscar"
+                  class="p-button-outlined p-button-secondary p-button-sm"></button>
+        </div>
+      </div>
+      <div class="p-card-content">
+        <p-listbox [options]="usuarios" [(ngModel)]="usuarioSeleccionado" [metaKeySelection]="false" [checkbox]="false"
+                   [filter]="false" [multiple]="false" optionLabel="name" [listStyle]="{'max-height':'450px'} "
+                   (onClick)="usuarioSeleccionadoTabla({usuario: usuarioSeleccionado})">
+          >
+
+          <ng-template let-usuario pTemplate="item">
+            <div class="border-bottom-1 border-gray-300">
+              <div class="flex align-items-center">
+                <p-avatar image="{{usuario.avatar_url}}" pBadge value="4" severity="danger" shape="circle"
+                          size="xlarge"></p-avatar>
+                <div class="mx-3">
+                  <p class="uppercase -mb-2 text-md"><span class="font-bold">{{usuario.login}}</span> - <span
+                    class="text-sm">ID: {{usuario.id}}</span></p>
+                  <p class="text-sm" style="color: #3b3b3b94">{{usuario.url}}</p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+    <div class="col-12 sm:col-12 md:col-12 lg:col-8 xl:col-8 justify-content-center">
+      <div id="informacion" style="display: none">
+        <p-card styleClass="p-card-shadow">
+          <div class="">
+            <div class="flex align-items-center">
+              <img width="25%" id="imagenUsuario"
+                   style="border-radius: 50%">
+              <div class="mx-3 w-full">
+                <h2 id="nombreUsuario" class="uppercase lg:text-2xl xl:text-2xl text-sm "></h2>
+                <a id="btnGithub" class="no-underline"><p class="text-lg" style="color: #3b3b3b94"
+                                                          id="usuarioGithub"></p></a>
+                <div class="flex justify-content-between w-full">
+                  <div class="w-4">
+                    <p class="text-sm" style="color: #3b3b3b94"><i class="pi pi-user-plus mr-2"></i><span
+                      id="seguidores"></span></p>
+                  </div>
+                  <div class="w-4">
+                    <p class="text-sm" style="color: #3b3b3b94"><i class="pi pi-heart-fill mr-2"></i><span id="siguiendo"></span></p>
+                  </div>
+                  <div class="w-5">
+                    <p class="text-sm" style="color: #3b3b3b94"><i class="pi pi-github mr-2"></i><span id="repositorios"></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-card>
+
+      </div>
+    </div>
+  </div>
+</div>
