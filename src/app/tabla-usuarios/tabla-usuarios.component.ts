@@ -16,9 +16,7 @@ export class TablaUsuariosComponent {
   }
 
   usuarioSeleccionadoTabla(usuario: any) {
-    console.log(usuario);
     this._githubapiService.consultasGlobales(usuario.usuario.url).subscribe((data: any) => {
-      console.log(data);
       let nombreUsuario = document.getElementById('nombreUsuario');
       nombreUsuario!.innerHTML = data.login;
       let imagenUsuario = document.getElementById('imagenUsuario');
@@ -42,7 +40,6 @@ export class TablaUsuariosComponent {
     let valorInput = (document.getElementById("inputBusqueda") as HTMLInputElement).value;
     if (valorInput == "") {
       this._githubapiService.obtenerTodosLosUsuarios().subscribe((data: any) => {
-        console.log(data);
         this.usuarios = data;
       });
     }
@@ -52,15 +49,12 @@ export class TablaUsuariosComponent {
     let valorInput = (document.getElementById("inputBusqueda") as HTMLInputElement).value;
     this._githubapiService.buscarUsuario(valorInput).subscribe((data: any) => {
       this.usuarios = data.items;
-
-      console.log(this.usuarios);
     });
   }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
     this._githubapiService.obtenerTodosLosUsuarios().subscribe((data: any) => {
-      console.log(data);
       this.usuarios = data;
     });
   }
